@@ -46,3 +46,4 @@ ENV/
 .env.production.local
 
 .parents-helper/**
+.parent-pilot/**
