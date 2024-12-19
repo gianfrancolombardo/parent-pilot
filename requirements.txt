@@ -1,0 +1,6 @@
+streamlit
+firebase-admin
+langchain
+python-dateutil
+pyyaml
+langchain-openai

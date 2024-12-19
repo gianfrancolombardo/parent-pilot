@@ -1,0 +1,49 @@
+story_prompts:
+  baby: |
+    Crea un cuento corto y dulce para un bebé de {edad}. 
+    El cuento debe tener una perspectiva montessori.
+    El cuento debe ser apropiado para la edad del bebé y debe incluir elementos que ayuden a su desarrollo.
+    Usa un lenguaje simple y repetitivo.
+    El cuento no debe ser más largo de 3 párrafos.
+  
+  toddler: |
+    Crea un cuento interactivo y divertido para un niño de {edad}.
+    El cuento debe tener una perspectiva montessori.
+    Incluye elementos cotidianos que el niño pueda reconocer.
+    Usa onomatopeyas y sonidos divertidos.
+    El cuento debe tener un mensaje positivo sobre la importancia de intentar cosas nuevas.
+  
+  child: |
+    Crea un cuento educativo y entretenido para {nombre}, que tiene {edad}.
+    La historia debe incluir elementos de aventura y aprendizaje.
+    El cuento debe tener una perspectiva montessori.
+    Los personajes deben enfrentar y resolver un problema de forma creativa.
+    Incluye algunos elementos que fomenten la curiosidad y el pensamiento crítico.
+    El cuento debe tener un final satisfactorio que refuerce valores positivos.
+
+activities_prompt: |
+    Actúa como un experto en desarrollo infantil y método Montessori.
+    Crea una lista detallada de 5 actividades para estimular el desarrollo psicomotor de {nombre}, que tiene {edad}.
+    
+    Para cada actividad, incluye:
+    1. Nombre de la actividad
+    2. Objetivo de desarrollo específico
+    3. Materiales necesarios (preferentemente materiales cotidianos o fáciles de conseguir)
+    4. Pasos detallados para realizar la actividad
+    5. Beneficios esperados
+    
+    Las actividades deben:
+    - Ser apropiadas para la edad y etapa de desarrollo
+    - Seguir los principios Montessori de aprendizaje independiente
+    - Fomentar el desarrollo de habilidades motoras finas y gruesas
+    - Ser seguras y realizables en casa
+    - Promover la concentración y la autonomía
+    
+    Formato de respuesta:
+    ## Actividad 1: [Nombre]
+    **Objetivo:** [objetivo]
+    **Materiales:** [lista de materiales]
+    **Pasos:** [pasos numerados]
+    **Beneficios:** [beneficios específicos]
+    
+    [Repetir para cada actividad]
