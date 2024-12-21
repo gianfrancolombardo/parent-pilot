@@ -1,6 +1,10 @@
 streamlit
 firebase-admin
+
 langchain
+langchain-openai
+
 python-dateutil
 pyyaml
-langchain-openai
+
+gTTS
