@@ -8,3 +8,5 @@ python-dateutil
 pyyaml
 
 gTTS
+
+plotly

@@ -10,6 +10,8 @@ import re
 # Configuración de la página
 st.set_page_config(page_title="Copilot para padres", page_icon="👶")
 
+
+
 # Función para limpiar el texto markdown
 def clean_markdown(text):
     # Eliminar encabezados
@@ -76,6 +78,19 @@ assistant = get_child_assistant()
 
 st.title('¡Bienvenido a tu Copilot para padres! 👶')
 
+# Crear dos columnas para los botones de navegación
+col1, col2 = st.columns(2)
+
+with col1:
+    st.page_link("pages/4_💭_Chat_Montessori.py", label="Chat", icon="💭")
+    st.page_link("pages/3_📚_Cuenta_cuentos.py", label="Cuenta Cuentos", icon="📚")
+    
+with col2:
+    st.page_link("pages/5_📊_Tracking.py", label="Seguimiento", icon="📊")
+    st.page_link("pages/2_🎯_Actividades_diarias.py", label="Actividades", icon="🎯")
+    
+st.divider()
+
 # Obtener los niños registrados
 children = firebase_mgr.get_all_children()
 
@@ -83,50 +98,31 @@ if not children:
     st.info("¡Aún no hay pequeños registrados! 🎈")
     st.button("⚙️ Ir a Administración para registrar a tu bebé", on_click=lambda: st.switch_page("pages/1_⚙️_Administracion.py"))
 else:
-    # Mostrar selector de niño si hay más de uno
-    if len(children) > 1:
-        selected_child_name = st.selectbox(
-            "Selecciona un pequeño",
-            [child['name'] for child in children]
-        )
-        selected_child = next(child for child in children if child['name'] == selected_child_name)
-    else:
-        selected_child = children[0]
-    
-    # Mostrar información del niño seleccionado
-    age = assistant.calculate_age(selected_child['birth_date'])
-    emoji_sex = '👦' if selected_child['gender'] == 'Masculino' else '👧'
-    
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        st.write(f"### {selected_child['name']} • {age} • {emoji_sex}")
-    with col2:
-        # Botón para generar el resumen
-        btn_summary = st.button(f'📝 Generar resumen de {selected_child["name"]}')
+    # Mostrar todos los niños con sus respectivos botones
+    for child in children:
+        age = assistant.calculate_age(child['birth_date'])
+        emoji_sex = '👦' if child['gender'] == 'Masculino' else '👧'
+        
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            st.write(f"### {child['name']} • {age} • {emoji_sex}")
+        with col2:
+            # Botón para generar el desarrollo
+            btn_summary = st.button(f'📝 Generar desarrollo de {child["name"]}', key=f"btn_{child['name']}")
 
-    if btn_summary:
-        with st.spinner(f'Analizando el desarrollo de {selected_child["name"]}...'):
-            daily_summary = assistant.create_welcome_summary(selected_child)
-            
-            # Mostrar el resumen en un expander
-            with st.expander("📝 Resumen del desarrollo", expanded=True):
-                col3, col4 = st.columns([1, 2])
-                with col3:
-                    st.write("🔊 Escuchar resumen:")
-                with col4:
-                    audio_player = get_audio_player(daily_summary)
-                    st.markdown(audio_player, unsafe_allow_html=True)
-
-                st.markdown(daily_summary)
-                    
+        if btn_summary:
+            with st.spinner(f'Analizando el desarrollo de {child["name"]}...'):
+                daily_summary = assistant.create_welcome_summary(child)
                 
-    # Si hay más niños, mostrar sus resúmenes en expanders colapsados
-    if len(children) > 1:
-        other_children = [child for child in children if child['name'] != selected_child['name']]
-        for child in other_children:
-            age = assistant.calculate_age(child['birth_date'])
-            emoji_sex = '👦' if child['gender'] == 'Masculino' else '👧'
-            with st.expander(f"📝 {child['name']} • {age} • {emoji_sex}", expanded=False):
-                with st.spinner(f'Analizando el desarrollo de {child["name"]}...'):
-                    summary = assistant.create_welcome_summary(child)
-                    st.markdown(summary)
+                # Mostrar el resumen en un expander
+                with st.expander("📝 Resumen del desarrollo", expanded=True):
+                    col3, col4 = st.columns([1, 2])
+                    with col3:
+                        st.write("🔊 Escuchar resumen:")
+                    with col4:
+                        audio_player = get_audio_player(daily_summary)
+                        st.markdown(audio_player, unsafe_allow_html=True)
+
+                    st.markdown(daily_summary)
+        
+        st.divider()  # Añadir un separador entre cada niño
