@@ -20,7 +20,6 @@ if not children:
     st.button("⚙️ Ir a Administración para registrar a tu bebé", 
              on_click=lambda: st.switch_page("pages/1_⚙️_Administracion.py"))
 else:
-    print(children)
     # Selector de niño
     if len(children) > 1:
         selected_child_name = st.selectbox(
