@@ -27,6 +27,12 @@ An AI-powered parenting assistant application that provides personalized advice 
 - Material recommendations and alternatives
 - Progress tracking and activity history
 
+### Daily Tracking 📊
+- **Diaper Changes Tracking**: Monitorea el número de cambios de pañales (pee y full) a lo largo del día.
+- **Feeding Tracking**: Registra las tomas de leche de los niños.
+- **Daily Averages**: Muestra promedios de cambios de pañales y tomas en los últimos 7 días.
+- **Visual Trends**: Gráficos que muestran la evolución de los registros a lo largo del tiempo.
+
 ### Administration ⚙️
 - Child information registration and management
 - Development and growth tracking
